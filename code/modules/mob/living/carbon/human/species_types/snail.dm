@@ -4,7 +4,7 @@
 	id = SPECIES_SNAIL
 	inherent_traits = list(
 		TRAIT_MUTANT_COLORS,
-		TRAIT_NO_UNDERWEAR,
+		// TRAIT_NO_UNDERWEAR, //DOPPLER EDIT REMOVAL - Roundstart Snails - Snails deserve to wear underwear
 		TRAIT_NO_SLIP_ALL,
 	)
 
@@ -27,7 +27,7 @@
 	)
 
 	///Multiplier for the speed we give them. Positive numbers make it move slower, negative numbers make it move faster.
-	var/snail_speed_mod = 6
+	var/snail_speed_mod = 0.5 // DOPPLER EDIT, Original: var/snail_speed_mod = 6 - Keeps speed on par to near what it currently is on the server.
 
 /datum/species/snail/prepare_human_for_preview(mob/living/carbon/human/human)
 	human.dna.features["mcolor"] = COLOR_BEIGE
@@ -114,6 +114,7 @@
 	max_integrity = 200
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 
+// DOPPLER EDIT ADDITION - CLARIFICATION - Roundstart Snails - These armor values don't actually do any protection of the wearer, this is for checking direct damage to the backpack. Damage resistance stuff is in their heart file.
 /datum/armor/backpack_snail
 	melee = 40
 	bullet = 30
@@ -131,3 +132,4 @@
 /obj/item/storage/backpack/snail/Initialize(mapload)
 	. = ..()
 	ADD_TRAIT(src, TRAIT_NODROP, INNATE_TRAIT)
+
