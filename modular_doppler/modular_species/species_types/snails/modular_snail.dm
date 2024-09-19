@@ -149,12 +149,6 @@
 		),
 		list(
 			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
-			SPECIES_PERK_ICON = "water",
-			SPECIES_PERK_NAME = "Water Breathing",
-			SPECIES_PERK_DESC = "Snails can breathe underwater.",
-		),
-		list(
-			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
 			SPECIES_PERK_ICON = "bone",
 			SPECIES_PERK_NAME = "Boneless",
 			SPECIES_PERK_DESC = "Snails are invertebrates, meaning they don't take bone wounds, but are easier to delimb.",
