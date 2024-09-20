@@ -59,7 +59,7 @@
 		source.visible_message(span_warning("[source]'s shell weathers the blow, absorbing most of the shock!"))
 		playsound(source, 'sound/weapons/parry.ogg', 50, extrarange = SHORT_RANGE_SOUND_EXTRARANGE)
 
-	COOLDOWN_START(src, shell_effect_cd, 5 SECONDS) // Cooldown resets EVERY time we get hit
+	COOLDOWN_START(src, shell_effect_cd, 3 SECONDS) // Cooldown resets EVERY time we get hit
 
 /// Checks if the passed mob is in a valid state to be blocking damage with the snail shell
 /obj/item/organ/internal/heart/snail/proc/is_blocking(mob/living/carbon/human/blocker, damage_amount, damagetype, attack_direction)
