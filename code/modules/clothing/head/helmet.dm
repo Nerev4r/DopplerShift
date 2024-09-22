@@ -201,10 +201,6 @@
 	visor_flags_cover = HEADCOVERSEYES | HEADCOVERSMOUTH | PEPPERPROOF
 	clothing_traits = list(TRAIT_HEAD_INJURY_BLOCKED)
 
-/obj/item/clothing/head/helmet/toggleable/riot/Initialize(mapload)
-	. = ..()
-	AddComponent(/datum/component/adjust_fishing_difficulty, 2)
-
 /datum/armor/toggleable_riot
 	melee = 50
 	bullet = 10
@@ -283,10 +279,6 @@
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 	dog_fashion = null
 	clothing_traits = list(TRAIT_HEAD_INJURY_BLOCKED)
-
-/obj/item/clothing/head/helmet/swat/Initialize(mapload)
-	. = ..()
-	AddComponent(/datum/component/adjust_fishing_difficulty, 3)
 
 /datum/armor/helmet_swat
 	melee = 40
@@ -436,10 +428,6 @@
 	strip_delay = 80
 	dog_fashion = null
 	clothing_traits = list(TRAIT_HEAD_INJURY_BLOCKED)
-
-/obj/item/clothing/head/helmet/knight/Initialize(mapload)
-	. = ..()
-	AddComponent(/datum/component/adjust_fishing_difficulty, 3)
 
 /datum/armor/helmet_knight
 	melee = 50

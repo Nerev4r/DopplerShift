@@ -159,7 +159,7 @@
 	..()
 
 /mob/living/basic/update_stat()
-	if(HAS_TRAIT(src, TRAIT_GODMODE))
+	if(status_flags & GODMODE)
 		return
 	if(stat != DEAD)
 		if(health <= 0)

@@ -187,8 +187,8 @@
 
 /obj/energy_ball/proc/dust_mobs(atom/A)
 	if(isliving(A))
-		var/mob/living/living = A
-		if(living.incorporeal_move || HAS_TRAIT(living, TRAIT_GODMODE))
+		var/mob/living/L = A
+		if(L.incorporeal_move || L.status_flags & GODMODE)
 			return
 	if(!iscarbon(A))
 		return

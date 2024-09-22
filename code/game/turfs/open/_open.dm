@@ -74,9 +74,6 @@
 
 		. += burnt_appearance
 
-/turf/open/examine_descriptor(mob/user)
-	return "floor"
-
 //direction is direction of travel of A
 /turf/open/zPassIn(direction)
 	if(direction != DOWN)

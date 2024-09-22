@@ -1240,10 +1240,10 @@ GLOBAL_LIST_EMPTY(features_by_species)
 
 		// 40% for level 3 damage on humans to scream in pain
 		if (humi.stat < UNCONSCIOUS && (prob(burn_damage) * 10) / 4)
-			INVOKE_ASYNC(humi, TYPE_PROC_REF(/mob, emote), "scream")
+			humi.emote("scream")
 
 		// Apply the damage to all body parts
-		humi.apply_damage(burn_damage, BURN, spread_damage = TRUE, wound_clothing = FALSE)
+		humi.apply_damage(burn_damage, BURN, spread_damage = TRUE)
 
 	// For cold damage, we cap at the threshold if you're dead
 	if(humi.getFireLoss() >= abs(HEALTH_THRESHOLD_DEAD) && humi.stat == DEAD)
@@ -1259,11 +1259,11 @@ GLOBAL_LIST_EMPTY(features_by_species)
 		var/damage_mod = coldmod * humi.physiology.cold_mod * (is_hulk ? HULK_COLD_DAMAGE_MOD : 1)
 		// Can't be a switch due to http://www.byond.com/forum/post/2750423
 		if(humi.coretemperature in 201 to cold_damage_limit)
-			humi.apply_damage(COLD_DAMAGE_LEVEL_1 * damage_mod * seconds_per_tick, damage_type, wound_clothing = FALSE)
+			humi.apply_damage(COLD_DAMAGE_LEVEL_1 * damage_mod * seconds_per_tick, damage_type)
 		else if(humi.coretemperature in 120 to 200)
-			humi.apply_damage(COLD_DAMAGE_LEVEL_2 * damage_mod * seconds_per_tick, damage_type, wound_clothing = FALSE)
+			humi.apply_damage(COLD_DAMAGE_LEVEL_2 * damage_mod * seconds_per_tick, damage_type)
 		else
-			humi.apply_damage(COLD_DAMAGE_LEVEL_3 * damage_mod * seconds_per_tick, damage_type, wound_clothing = FALSE)
+			humi.apply_damage(COLD_DAMAGE_LEVEL_3 * damage_mod * seconds_per_tick, damage_type)
 
 /**
  * Used to apply burn wounds on random limbs
@@ -1312,7 +1312,7 @@ GLOBAL_LIST_EMPTY(features_by_species)
 	if(humi.bodytemperature > BODYTEMP_HEAT_WOUND_LIMIT + 2800)
 		burn_damage = HEAT_DAMAGE_LEVEL_3
 
-	humi.apply_damage(burn_damage * seconds_per_tick, BURN, bodypart, wound_clothing = FALSE)
+	humi.apply_damage(burn_damage * seconds_per_tick, BURN, bodypart)
 
 /// Handle the air pressure of the environment
 /datum/species/proc/handle_environment_pressure(mob/living/carbon/human/H, datum/gas_mixture/environment, seconds_per_tick, times_fired)
@@ -1406,9 +1406,10 @@ GLOBAL_LIST_EMPTY(features_by_species)
 
 	for (var/preference_type in GLOB.preference_entries)
 		var/datum/preference/preference = GLOB.preference_entries[preference_type]
+
 		if ( \
 			(preference.relevant_inherent_trait in inherent_traits) \
-			|| (preference.relevant_external_organ in get_mut_organs()) \
+			|| (preference.relevant_external_organ in mutant_organs) \
 			|| (preference.relevant_head_flag && check_head_flags(preference.relevant_head_flag)) \
 			|| (preference.relevant_body_markings in body_markings) \
 		)
@@ -1456,24 +1457,23 @@ GLOBAL_LIST_EMPTY(features_by_species)
 /datum/species/proc/get_sneeze_sound(mob/living/carbon/human/human)
 	return
 
-/datum/species/proc/get_mut_organs(include_brain = TRUE)
-	var/list/mut_organs = list()
-	mut_organs += mutant_organs
-	if (include_brain)
-		mut_organs += mutantbrain
-	mut_organs += mutantheart
-	mut_organs += mutantlungs
-	mut_organs += mutanteyes
-	mut_organs += mutantears
-	mut_organs += mutanttongue
-	mut_organs += mutantliver
-	mut_organs += mutantstomach
-	mut_organs += mutantappendix
-	list_clear_nulls(mut_organs)
-	return mut_organs
-
 /datum/species/proc/get_types_to_preload()
-	return get_mut_organs(FALSE)
+	var/list/to_store = list()
+	to_store += mutant_organs
+	for(var/obj/item/organ/horny as anything in mutant_organs)
+		to_store += horny //Haha get it?
+
+	//Don't preload brains, cause reuse becomes a horrible headache
+	to_store += mutantheart
+	to_store += mutantlungs
+	to_store += mutanteyes
+	to_store += mutantears
+	to_store += mutanttongue
+	to_store += mutantliver
+	to_store += mutantstomach
+	to_store += mutantappendix
+	//We don't cache mutant hands because it's not constrained enough, too high a potential for failure
+	return to_store
 
 
 /**

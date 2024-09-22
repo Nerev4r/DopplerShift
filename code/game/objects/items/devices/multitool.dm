@@ -35,11 +35,6 @@
 	var/apc_scanner = TRUE
 	COOLDOWN_DECLARE(next_apc_scan)
 
-/obj/item/multitool/Destroy()
-	if(buffer)
-		remove_buffer(buffer)
-	return ..()
-
 /obj/item/multitool/examine(mob/user)
 	. = ..()
 	. += span_notice("Its buffer [buffer ? "contains [buffer]." : "is empty."]")
@@ -75,10 +70,9 @@
 /obj/item/multitool/proc/set_buffer(datum/buffer)
 	if(src.buffer)
 		UnregisterSignal(src.buffer, COMSIG_QDELETING)
-		remove_buffer(src.buffer)
 	src.buffer = buffer
 	if(!QDELETED(buffer))
-		RegisterSignal(buffer, COMSIG_QDELETING, PROC_REF(remove_buffer))
+		RegisterSignal(buffer, COMSIG_QDELETING, PROC_REF(on_buffer_del))
 
 /**
  * Called when the buffer's stored object is deleted
@@ -86,9 +80,8 @@
  * This proc does not clear the buffer of the multitool, it is here to
  * handle the deletion of the object the buffer references
  */
-/obj/item/multitool/proc/remove_buffer(datum/source)
+/obj/item/multitool/proc/on_buffer_del(datum/source)
 	SIGNAL_HANDLER
-	SEND_SIGNAL(src, COMSIG_MULTITOOL_REMOVE_BUFFER, source)
 	buffer = null
 
 // Syndicate device disguised as a multitool; it will turn red when an AI camera is nearby.

@@ -137,7 +137,7 @@
 
 /*
  * Set up and populate our list of options.
- * Overridden by subtypes.
+ * Overriden by subtypes.
  *
  * The list of options is a associated list of format:
  *   item_name = list(

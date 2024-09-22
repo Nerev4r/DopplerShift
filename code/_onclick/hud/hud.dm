@@ -41,7 +41,6 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	var/atom/movable/screen/rest_icon
 	var/atom/movable/screen/throw_icon
 	var/atom/movable/screen/module_store_icon
-	var/atom/movable/screen/floor_change
 
 	var/list/static_inventory = list() //the screen objects which are static
 	var/list/toggleable_inventory = list() //the screen objects which can be hidden
@@ -229,7 +228,6 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	zone_select = null
 	pull_icon = null
 	rest_icon = null
-	floor_change = null
 	hand_slots.Cut()
 
 	QDEL_LIST(toggleable_inventory)
@@ -420,11 +418,6 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	if(!.)
 		return
 	update_robot_modules_display()
-
-/datum/hud/new_player/show_hud(version = 0, mob/viewmob)
-	. = ..()
-	if(.)
-		show_station_trait_buttons()
 
 /datum/hud/proc/hidden_inventory_update()
 	return

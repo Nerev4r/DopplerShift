@@ -1147,9 +1147,6 @@
 			if(0 to 25)
 				. += span_warning("It's falling apart!")
 
-/obj/machinery/examine_descriptor(mob/user)
-	return "machine"
-
 /obj/machinery/examine_more(mob/user)
 	. = ..()
 	if(HAS_TRAIT(user, TRAIT_RESEARCH_SCANNER) && component_parts)

@@ -41,6 +41,8 @@
 		set_light_on(TRUE)
 	update_brightness()
 	register_context()
+	if(toggle_context)
+		RegisterSignal(src, COMSIG_HIT_BY_SABOTEUR, PROC_REF(on_saboteur))
 
 	var/static/list/slapcraft_recipe_list = list(/datum/crafting_recipe/flashlight_eyes)
 
@@ -254,7 +256,7 @@
 	if(!scanning.get_bodypart(BODY_ZONE_HEAD))
 		to_chat(user, span_warning("[scanning] doesn't have a head!"))
 		return
-	if(light_power < 0.5)
+	if(light_power < 1)
 		to_chat(user, span_warning("[src] isn't bright enough to see anything!"))
 		return
 
@@ -284,12 +286,12 @@
 		setDir(user.dir)
 
 /// when hit by a light disruptor - turns the light off, forces the light to be disabled for a few seconds
-/obj/item/flashlight/on_saboteur(datum/source, disrupt_duration)
-	. = ..()
+/obj/item/flashlight/proc/on_saboteur(datum/source, disrupt_duration)
+	SIGNAL_HANDLER
 	if(light_on)
 		toggle_light()
 	COOLDOWN_START(src, disabled_time, disrupt_duration)
-	return TRUE
+	return COMSIG_SABOTEUR_SUCCESS
 
 /obj/item/flashlight/pen
 	name = "penlight"

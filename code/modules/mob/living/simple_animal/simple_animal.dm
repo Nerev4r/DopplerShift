@@ -234,7 +234,7 @@
 		. += "There appears to be [icon2html(access_card, user)] \a [access_card] pinned to [p_them()]."
 
 /mob/living/simple_animal/update_stat()
-	if(HAS_TRAIT(src, TRAIT_GODMODE))
+	if(status_flags & GODMODE)
 		return
 	if(stat != DEAD)
 		if(health <= 0)
@@ -389,8 +389,8 @@
 	if(see_invisible < the_target.invisibility)
 		return FALSE
 	if(ismob(the_target))
-		var/mob/mob = the_target
-		if(HAS_TRAIT(mob, TRAIT_GODMODE))
+		var/mob/M = the_target
+		if(M.status_flags & GODMODE)
 			return FALSE
 	if (isliving(the_target))
 		var/mob/living/L = the_target

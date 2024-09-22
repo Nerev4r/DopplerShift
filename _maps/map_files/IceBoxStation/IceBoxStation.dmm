@@ -2371,6 +2371,12 @@
 /obj/structure/fluff/shower_drain,
 /turf/open/floor/iron/freezer,
 /area/station/commons/toilet)
+"aJj" = (
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/closed/wall,
+/area/station/service/library)
 "aJm" = (
 /obj/structure/cable,
 /obj/machinery/door/window/left/directional/east{
@@ -21807,7 +21813,7 @@
 /turf/open/floor/plating,
 /area/station/engineering/lobby)
 "gkN" = (
-/obj/machinery/vending/autodrobe,
+/obj/machinery/vending/autodrobe/all_access,
 /turf/open/floor/iron/dark/textured,
 /area/station/security/prison)
 "gkP" = (
@@ -25798,7 +25804,7 @@
 "hul" = (
 /obj/effect/turf_decal/tile/neutral/fourcorners,
 /obj/machinery/status_display/evac/directional/north,
-/obj/machinery/vending/autodrobe,
+/obj/machinery/vending/autodrobe/all_access,
 /turf/open/floor/iron,
 /area/station/commons/locker)
 "huq" = (
@@ -38488,7 +38494,6 @@
 	pixel_y = 32;
 	idExterior = "virology_airlock_exterior";
 	idInterior = "virology_airlock_interior";
-	idSelf = "virology_airlock_control";
 	interior_airlock = "virology_airlock_control";
 	name = "Virology Access Controller";
 	req_access = list("virology")
@@ -40893,7 +40898,10 @@
 /turf/open/floor/iron,
 /area/station/maintenance/department/electrical)
 "lOV" = (
-/obj/machinery/disposal/bin,
+/obj/machinery/disposal/bin{
+	desc = "A pneumatic waste disposal unit. This one leads to the morgue.";
+	name = "corpse disposal"
+	},
 /obj/structure/disposalpipe/trunk{
 	dir = 4
 	},
@@ -42546,7 +42554,7 @@
 	},
 /area/station/security/brig/entrance)
 "mqI" = (
-/obj/machinery/vending/boozeomat,
+/obj/machinery/vending/boozeomat/all_access,
 /turf/open/floor/plating,
 /area/station/maintenance/port/aft)
 "mqL" = (
@@ -74188,7 +74196,7 @@
 /area/station/security/prison/rec)
 "vwG" = (
 /obj/machinery/vending/security{
-	all_products_free = 0
+	onstation_override = 1
 	},
 /obj/effect/turf_decal/tile/red/half/contrasted{
 	dir = 8
@@ -257783,7 +257791,7 @@ qMm
 hUD
 pyJ
 lPh
-hUD
+aJj
 hUD
 ebb
 cYE

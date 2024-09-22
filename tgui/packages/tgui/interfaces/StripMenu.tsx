@@ -217,7 +217,7 @@ const SLOTS: Record<
   tail: {
     displayName: 'tail',
     gridSpot: getGridSpotKey([3, 3]),
-    image: 'inventory-tail.png',
+    image: 'inventory-belt.png',
   },
   /* Doppler station addition end */
 };

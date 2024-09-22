@@ -159,7 +159,7 @@
 	mask = /obj/item/clothing/mask/fakemoustache/italian
 
 /obj/machinery/vending/hotdog/museum
-	all_products_free = TRUE
+	onstation_override = TRUE
 
 /obj/machinery/vending/hotdog/museum/screwdriver_act(mob/living/user, obj/item/attack_item)
 	return NONE
@@ -199,6 +199,6 @@
 	var/obj/structure/toilet/destination = pick(partners)
 	forceMove(destination)
 	destination.w_items += w_class
-	LAZYADD(destination.cistern_items, src)
+	destination.contents += src
 
 #undef CAFE_KEYCARD_TOILETS

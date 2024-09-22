@@ -174,11 +174,6 @@ export const has_antennae: FeatureToggle = {
   component: CheckboxInput,
 };
 
-export const antennae_color: Feature<string[]> = {
-  name: 'Antennae Color',
-  component: FeatureTriColorInput,
-};
-
 export const has_fluff: FeatureToggle = {
   name: 'Add Part: Fluff',
   category: 'GAMEPLAY',

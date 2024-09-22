@@ -55,12 +55,6 @@ with open(file_reference, 'r') as file:
             break
         elif not reading:
             continue
-        # DOPPLER EDIT START - Modular unit tests
-        elif line == "// DOPPLER EDIT START":
-            continue
-        elif line == "// DOPPLER EDIT END":
-            continue
-        # DOPPLER EDIT END
 
         lines.append(line)
 
@@ -84,10 +78,6 @@ for code_file in scannable_files:
         dm_path = code_file.replace('/', '\\')
     else:
         dm_path = os.path.basename(code_file)
-        # DOPPLER EDIT START - Modular unit tests - have to append this because it gets removed; thank you TG, you made me cry so much
-        if("~doppler/" in code_file):
-            dm_path = "~doppler\\" + dm_path
-        # DOPPLER EDIT END
 
     included = f"#include \"{dm_path}\"" in lines
 

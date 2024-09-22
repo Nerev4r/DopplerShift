@@ -388,6 +388,12 @@
 	/// Maximum range we can set.
 	var/max_range = 5
 
+/obj/item/mod/module/flashlight/on_suit_activation()
+	RegisterSignal(mod.wearer, COMSIG_HIT_BY_SABOTEUR, PROC_REF(on_saboteur))
+
+/obj/item/mod/module/flashlight/on_suit_deactivation(deleting = FALSE)
+	UnregisterSignal(mod.wearer, COMSIG_HIT_BY_SABOTEUR)
+
 /obj/item/mod/module/flashlight/on_activation()
 	set_light_flags(light_flags | LIGHT_ATTACHED)
 	set_light_on(active)
@@ -397,11 +403,11 @@
 	set_light_flags(light_flags & ~LIGHT_ATTACHED)
 	set_light_on(active)
 
-/obj/item/mod/module/flashlight/on_saboteur(datum/source, disrupt_duration)
-	. = ..()
+/obj/item/mod/module/flashlight/proc/on_saboteur(datum/source, disrupt_duration)
+	SIGNAL_HANDLER
 	if(active)
 		on_deactivation()
-		return TRUE
+		return COMSIG_SABOTEUR_SUCCESS
 
 /obj/item/mod/module/flashlight/on_process(seconds_per_tick)
 	active_power_cost = base_power * light_range
@@ -958,7 +964,7 @@
 
 /obj/item/mod/module/fishing_glove
 	name = "MOD fishing glove module"
-	desc = "A MOD module that takes in an external fishing rod to enable the user to fish without having to hold one, while also making it slightly easier."
+	desc = "A MOD module that takes in an external fishing rod to enable the user to fish without having to hold one."
 	icon_state = "fishing_glove"
 	complexity = 1
 	overlay_state_inactive = "fishing_glove"
@@ -1013,20 +1019,17 @@
 		var/obj/item/gloves = mod?.get_part_from_slot(ITEM_SLOT_GLOVES)
 		if(gloves && !QDELETED(mod))
 			qdel(gloves.GetComponent(/datum/component/profound_fisher))
-	return ..()
 
 /obj/item/mod/module/fishing_glove/on_suit_activation()
-	var/obj/item/gloves = mod.get_part_from_slot(ITEM_SLOT_GLOVES)
-	if(!gloves)
+	if(!equipped)
 		return
-	gloves.AddComponent(/datum/component/adjust_fishing_difficulty, 5)
-	if(equipped)
+	var/obj/item/gloves = mod.get_part_from_slot(ITEM_SLOT_GLOVES)
+	if(gloves)
 		gloves.AddComponent(/datum/component/profound_fisher, equipped)
 
 /obj/item/mod/module/fishing_glove/on_suit_deactivation(deleting = FALSE)
 	var/obj/item/gloves = mod.get_part_from_slot(ITEM_SLOT_GLOVES)
 	if(gloves && !deleting)
-		qdel(gloves.GetComponent(/datum/component/adjust_fishing_difficulty))
 		qdel(gloves.GetComponent(/datum/component/profound_fisher))
 
 /obj/item/mod/module/shock_absorber

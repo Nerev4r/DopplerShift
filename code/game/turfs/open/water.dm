@@ -1,5 +1,4 @@
 /turf/open/water
-	name = "water"
 	gender = PLURAL
 	desc = "Shallow water."
 	icon = 'icons/turf/floors.dmi'
@@ -30,7 +29,6 @@
 	AddElement(/datum/element/watery_tile)
 	if(!isnull(fishing_datum))
 		AddElement(/datum/element/lazy_fishing_spot, fishing_datum)
-	ADD_TRAIT(src, TRAIT_CATCH_AND_RELEASE, INNATE_TRAIT)
 
 /turf/open/water/jungle
 

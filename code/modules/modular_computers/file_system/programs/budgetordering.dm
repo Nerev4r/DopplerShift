@@ -240,7 +240,7 @@
 
 			var/reason = ""
 			if((requestonly && !self_paid) || !(computer.computer_id_slot?.GetID()))
-				reason = tgui_input_text(usr, "Reason", name, max_length = MAX_MESSAGE_LEN)
+				reason = tgui_input_text(usr, "Reason", name)
 				if(isnull(reason) || ..())
 					return
 
