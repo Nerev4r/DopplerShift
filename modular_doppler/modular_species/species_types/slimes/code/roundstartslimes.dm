@@ -7,10 +7,10 @@
 /datum/species/jelly
 	hair_alpha = 160 //a notch brighter so it blends better.
 	facial_hair_alpha = 160
-	mutantliver = /obj/item/organ/internal/liver/slime
-	mutantstomach = /obj/item/organ/internal/stomach/slime
-	mutantbrain = /obj/item/organ/internal/brain/slime
-	mutantears = /obj/item/organ/internal/ears/jelly
+	mutantliver = /obj/item/organ/liver/slime
+	mutantstomach = /obj/item/organ/stomach/slime
+	mutantbrain = /obj/item/organ/brain/slime
+	mutantears = /obj/item/organ/ears/jelly
 	inherent_traits = list(
 		TRAIT_MUTANT_COLORS,
 		TRAIT_TOXINLOVER,
@@ -40,17 +40,17 @@
 	if(core_signal)
 		core_signal.Remove(former_jellyperson)
 
-/obj/item/organ/internal/eyes/jelly
+/obj/item/organ/ears/jelly
 	name = "photosensitive eyespots"
 	zone = BODY_ZONE_CHEST
 	organ_flags = ORGAN_UNREMOVABLE
 
-/obj/item/organ/internal/eyes/roundstartslime
+/obj/item/organ/ears/roundstartslime
 	name = "photosensitive eyespots"
 	zone = BODY_ZONE_CHEST
 	organ_flags = ORGAN_UNREMOVABLE
 
-/obj/item/organ/internal/ears/jelly
+/obj/item/organ/ears/jelly
 	name = "core audiosomes"
 	zone = BODY_ZONE_CHEST
 	organ_flags = ORGAN_UNREMOVABLE
@@ -63,17 +63,17 @@
 	zone = BODY_ZONE_CHEST
 	organ_flags = ORGAN_UNREMOVABLE
 
-/obj/item/organ/internal/liver/slime
+/obj/item/organ/liver/slime
 	name = "endoplasmic reticulum"
 	zone = BODY_ZONE_CHEST
 	organ_flags = ORGAN_UNREMOVABLE
 
-/obj/item/organ/internal/stomach/slime
+/obj/item/organ/stomach/slime
 	name = "golgi apparatus"
 	zone = BODY_ZONE_CHEST
 	organ_flags = ORGAN_UNREMOVABLE
 
-/obj/item/organ/internal/brain/slime
+/obj/item/organ/brain/slime
 	name = "core"
 	desc = "The central core of a slimeperson, technically their 'extract.' Where the cytoplasm, membrane, and organelles come from; perhaps this is also a mitochondria?"
 	zone = BODY_ZONE_CHEST
@@ -91,18 +91,18 @@
 	throw_speed = 0.5
 	resistance_flags = INDESTRUCTIBLE | FIRE_PROOF | LAVA_PROOF | UNACIDABLE | ACID_PROOF | FREEZE_PROOF
 
-/obj/item/organ/internal/brain/slime/Initialize(mapload, mob/living/carbon/organ_owner, list/examine_list)
+/obj/item/organ/brain/slime/Initialize(mapload, mob/living/carbon/organ_owner, list/examine_list)
 	. = ..()
 	colorize()
 
-/obj/item/organ/internal/brain/slime/examine()
+/obj/item/organ/brain/slime/examine()
 	. = ..()
 	if(gps_active)
 		. += span_notice("A dim light lowly pulsates from the center of the core, indicating an outgoing signal from a tracking microchip.")
 		. += span_red("You could probably snuff that out.")
 	. += span_hypnophrase("You remember that pouring plasma on it, if it's non-embodied, would make it regrow one.")
 
-/obj/item/organ/internal/brain/slime/attack_self(mob/living/user) // Allows a player (presumably an antag) to deactivate the GPS signal on a slime core
+/obj/item/organ/brain/slime/attack_self(mob/living/user) // Allows a player (presumably an antag) to deactivate the GPS signal on a slime core
 	if(!(gps_active))
 		return
 	user.visible_message(span_warning("[user] begins jamming [user.p_their()] hand into a slime core! Slime goes everywhere!"),
@@ -125,7 +125,7 @@
 	gps_active = FALSE
 	qdel(GetComponent(/datum/component/gps))
 
-/obj/item/organ/internal/brain/slime/Insert(mob/living/carbon/organ_owner, special = FALSE, movement_flags)
+/obj/item/organ/brain/slime/Insert(mob/living/carbon/organ_owner, special = FALSE, movement_flags)
 	. = ..()
 	if(!.)
 		return
@@ -133,14 +133,14 @@
 	core_ejected = FALSE
 	RegisterSignal(organ_owner, COMSIG_LIVING_DEATH, PROC_REF(on_slime_death))
 
-/obj/item/organ/internal/brain/slime/on_mob_remove(mob/living/carbon/organ_owner)
+/obj/item/organ/brain/slime/on_mob_remove(mob/living/carbon/organ_owner)
 	. = ..()
 	UnregisterSignal(organ_owner, COMSIG_LIVING_DEATH)
 
 /**
 * Colors the slime's core (their brain) the same as their first mutant color.
 */
-/obj/item/organ/internal/brain/slime/proc/colorize()
+/obj/item/organ/brain/slime/proc/colorize()
 	if(owner && isjellyperson(owner))
 		core_color = owner.dna.features["mcolor"]
 		add_atom_colour(core_color, FIXED_COLOUR_PRIORITY)
@@ -148,7 +148,7 @@
 /**
 * Handling for tracking when the slime in question dies (except through gibbing), which then segues into the core ejection proc.
 */
-/obj/item/organ/internal/brain/slime/proc/on_slime_death(mob/living/victim, gibbed)
+/obj/item/organ/brain/slime/proc/on_slime_death(mob/living/victim, gibbed)
 	SIGNAL_HANDLER
 	UnregisterSignal(victim, COMSIG_LIVING_DEATH)
 
@@ -163,7 +163,7 @@
 * CORE EJECTION PROC -
 * Makes it so that when a slime dies, their core ejects and their body is qdel'd.
 */
-/obj/item/organ/internal/brain/slime/proc/core_ejection(mob/living/victim, new_stat, turf/loc_override)
+/obj/item/organ/brain/slime/proc/core_ejection(mob/living/victim, new_stat, turf/loc_override)
 	if(core_ejected)
 		return
 	core_ejected = TRUE
@@ -189,7 +189,7 @@
 /**
 * Procs the ethereal jaunt liquid effect when the slime dissolves on death.
 */
-/obj/item/organ/internal/brain/slime/proc/do_steam_effects(turf/loc)
+/obj/item/organ/brain/slime/proc/do_steam_effects(turf/loc)
 	var/datum/effect_system/steam_spread/steam = new()
 	steam.set_up(10, FALSE, loc)
 	steam.start()
@@ -198,7 +198,7 @@
 * CHECK FOR REPAIR SECTION
 * Makes it so that when a slime's core has plasma poured on it, it builds a new body and moves the brain into it.
 */
-/obj/item/organ/internal/brain/slime/check_for_repair(obj/item/item, mob/user)
+/obj/item/organ/brain/slime/check_for_repair(obj/item/item, mob/user)
 	if(damage && item.is_drainable() && item.reagents.has_reagent(/datum/reagent/toxin/plasma) && item.reagents.get_reagent_amount(/datum/reagent/toxin/plasma) >= 100 && (organ_flags & ORGAN_ORGANIC)) //attempt to heal the brain
 
 		user.visible_message(span_notice("[user] starts to slowly pour the contents of [item] onto [src]. It seems to bubble and roil, beginning to stretch its cytoskeleton outwards..."), span_notice("You start to slowly pour the contents of [item] onto [src]. It seems to bubble and roil, beginning to stretch its membrane outwards..."))
@@ -381,8 +381,8 @@
 	examine_limb_id = SPECIES_SLIMEPERSON
 	coldmod = 3
 	heatmod = 1
-	mutanteyes = /obj/item/organ/internal/eyes/roundstartslime
-	mutanttongue = /obj/item/organ/internal/tongue/jelly
+	mutanteyes = /obj/item/organ/ears/roundstartslime
+	mutanttongue = /obj/item/organ/tongue/jelly
 
 	bodypart_overrides = list( //Overriding jelly bodyparts
 		BODY_ZONE_L_ARM = /obj/item/bodypart/arm/left/jelly/slime/roundstart,
@@ -452,7 +452,7 @@
 
 /datum/action/innate/core_signal/Activate()
 	var/mob/living/carbon/human/slime = owner
-	var/obj/item/organ/internal/brain/slime/core = slime.get_organ_slot(ORGAN_SLOT_BRAIN)
+	var/obj/item/organ/brain/slime/core = slime.get_organ_slot(ORGAN_SLOT_BRAIN)
 	if(slime_restricted && !isjellyperson(slime))
 		return
 	if(core.gps_active)
