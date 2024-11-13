@@ -1,8 +1,8 @@
 #define SLIME_ACTIONS_ICON_FILE 'modular_nova/master_files/icons/mob/actions/actions_slime.dmi'
 /// This is the level of waterstacks that start doing noteworthy bloodloss to a slimeperson.
-#define DAMAGE_WATER_STACKS 5
+#define WATER_STACKS_DAMAGING 5
 /// This is the level of waterstacks that prevent a slimeperson from regenerating, doing minimal bloodloss in the process.
-#define REGEN_WATER_STACKS 1
+#define WATER_STACKS_NO_REGEN 1
 
 /datum/species/jelly
 	hair_alpha = 160 //a notch brighter so it blends better.
@@ -40,12 +40,12 @@
 	if(core_signal)
 		core_signal.Remove(former_jellyperson)
 
-/obj/item/organ/ears/jelly
+/obj/item/organ/eyes/jelly
 	name = "photosensitive eyespots"
 	zone = BODY_ZONE_CHEST
 	organ_flags = ORGAN_UNREMOVABLE
 
-/obj/item/organ/ears/roundstartslime
+/obj/item/organ/eyes/roundstartslime
 	name = "photosensitive eyespots"
 	zone = BODY_ZONE_CHEST
 	organ_flags = ORGAN_UNREMOVABLE
@@ -74,15 +74,15 @@
 	organ_flags = ORGAN_UNREMOVABLE
 
 /obj/item/organ/brain/slime
-	name = "core"
-	desc = "The central core of a slimeperson, technically their 'extract.' Where the cytoplasm, membrane, and organelles come from; perhaps this is also a mitochondria?"
+	name = "slime core"
+	desc = "The central core of a slimeperson, technically their 'extract', and where the cytoplasm, membrane, and organelles come from. Cutting edge research in xenobiology suggests this could also be a mitochondria."
+	icon = 'modular_doppler/modular_species/species_types/slimes/icons/slimecore.dmi'
+	icon_state = "slime_core"
 	zone = BODY_ZONE_CHEST
 	/// This is the VFX for what happens when they melt and die.
 	var/obj/effect/death_melt_type = /obj/effect/temp_visual/wizard/out
 	/// Color of the slimeperson's 'core' brain, defaults to white.
 	var/core_color = COLOR_WHITE
-	icon = 'modular_nova/master_files/icons/obj/surgery.dmi'
-	icon_state = "slime_core"
 	/// This tracks whether their core has been ejected or not after they die.
 	var/core_ejected = FALSE
 	/// This tracks whether their GPS microchip is enabled or not, only becomes TRUE on activation of the below ability /datum/action/innate/core_signal.
@@ -163,7 +163,7 @@
 * CORE EJECTION PROC -
 * Makes it so that when a slime dies, their core ejects and their body is qdel'd.
 */
-/obj/item/organ/brain/slime/proc/core_ejection(mob/living/victim, new_stat, turf/loc_override)
+/obj/item/organ/internal/brain/slime/proc/core_ejection(mob/living/victim, new_stat, turf/loc_override)
 	if(core_ejected)
 		return
 	core_ejected = TRUE
@@ -203,7 +203,7 @@
 
 		user.visible_message(span_notice("[user] starts to slowly pour the contents of [item] onto [src]. It seems to bubble and roil, beginning to stretch its cytoskeleton outwards..."), span_notice("You start to slowly pour the contents of [item] onto [src]. It seems to bubble and roil, beginning to stretch its membrane outwards..."))
 		if(!do_after(user, 60 SECONDS, src))
-			to_chat(user, span_warning("You failed to pour the contents of [item] onto [src]!"))
+			to_chat(user, span_warning("You fail to pour the contents of [item] onto [src]!"))
 			return TRUE
 
 		user.visible_message(span_notice("[user] pours the contents of [item] onto [src], causing it to form a proper cytoplasm and outer membrane."), span_notice("You pour the contents of [item] onto [src], causing it to form a proper cytoplasm and outer membrane."))
@@ -219,10 +219,10 @@
 			user.balloon_alert("This brain is not a viable candidate for repair!")
 			return TRUE
 		if(isnull(brainmob.stored_dna))
-			user.balloon_alert("This brain does not contain any dna!")
+			user.balloon_alert("No DNA!")
 			return TRUE
 		if(isnull(brainmob.client))
-			user.balloon_alert("This brain does not contain a mind!")
+			user.balloon_alert("No mind at the moment!")
 			return TRUE
 		var/mob/living/carbon/human/new_body = new /mob/living/carbon/human(src.loc)
 
@@ -265,12 +265,12 @@
 	var/healing = TRUE
 
 	var/datum/status_effect/fire_handler/wet_stacks/wetness = locate() in slime.status_effects
-	if(istype(wetness) && wetness.stacks > (DAMAGE_WATER_STACKS))
+	if(istype(wetness) && wetness.stacks > (WATER_STACKS_DAMAGING))
 		slime.blood_volume -= 2 * seconds_per_tick
 		if(SPT_PROB(25, seconds_per_tick))
 			slime.visible_message(span_danger("[slime]'s form begins to lose cohesion, seemingly diluting with the water!"), span_warning("The water starts to dilute your body, dry it off!"))
 
-	if(istype(wetness) && wetness.stacks > (REGEN_WATER_STACKS))
+	if(istype(wetness) && wetness.stacks > (WATER_STACKS_NO_REGEN))
 		healing = FALSE
 		if(SPT_PROB(1, seconds_per_tick))
 			to_chat(slime, span_warning("You can't pull your body together and regenerate with water inside it!"))
@@ -304,7 +304,7 @@
 		return
 
 	user.apply_status_effect(/datum/status_effect/slime_washing)
-	user.visible_message(span_purple("[user]'s outer membrane starts to develop a roiling film on the outside, absorbing grime into [user.p_their()] inner layer!"), span_purple("Your outer membrane develops a roiling film on the outside, absorbing grime off yourself and your clothes; as well as the floor beneath you."))
+	user.visible_message(span_purple("[user]'s outer membrane starts to develop a cloudy film on the outside, absorbing grime into [user.p_their()] inner layer!"), span_purple("Your outer membrane develops a cloudy film on the outside, absorbing grime off yourself and your clothes; as well as the floor beneath you."))
 
 /**
 * Called when you activate it again after casting the ability-- turning it off, so to say.
@@ -377,11 +377,11 @@
 
 /datum/species/jelly/roundstartslime
 	name = "Xenobiological Slime Hybrid"
-	id = SPECIES_SLIMEPERSON
+	id = SPECIES_SLIMESTART
 	examine_limb_id = SPECIES_SLIMEPERSON
 	coldmod = 3
 	heatmod = 1
-	mutanteyes = /obj/item/organ/ears/roundstartslime
+	mutanteyes = /obj/item/organ/eyes/roundstartslime
 	mutanttongue = /obj/item/organ/tongue/jelly
 
 	bodypart_overrides = list( //Overriding jelly bodyparts
@@ -442,9 +442,9 @@
  */
 /datum/action/innate/core_signal
 	name = "Toggle Core Signal"
-	desc = "Interface with the microchip placed in your core, modifying if it emits a GPS signal or not; due to how thick your liquid body is, the signal won't reach out until your core is outside of it."
+	desc = "Interface with the microchip placed in your core, modifying whether it emits a GPS signal or not. Due to how thick your liquid body is, the signal won't reach out until your core is outside of it."
 	check_flags = AB_CHECK_CONSCIOUS
-	button_icon = 'modular_nova/master_files/icons/obj/surgery.dmi'
+	button_icon = 'modular_doppler/modular_species/species_types/slimes/icons/slimecore.dmi'
 	button_icon_state = "slime_core"
 	background_icon_state = "bg_alien"
 	/// Do you need to be a slime-person to use this ability?
@@ -463,5 +463,5 @@
 		core.gps_active = TRUE
 
 #undef SLIME_ACTIONS_ICON_FILE
-#undef DAMAGE_WATER_STACKS
-#undef REGEN_WATER_STACKS
+#undef WATER_STACKS_DAMAGING
+#undef WATER_STACKS_NO_REGEN

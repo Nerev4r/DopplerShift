@@ -6,7 +6,7 @@
 	can_dismember = TRUE //Their organs are in their chest now, all slime subspecies, so they can safely be decapitated.
 
 /obj/item/bodypart/head/jelly/slime/roundstart
-	is_dimorphic = TRUE
+	is_dimorphic = FALSE
 	icon_greyscale = BODYPART_ICON_ROUNDSTARTSLIME
 	biological_state = (BIO_FLESH|BIO_BLOODED)
 	teeth_count = 0
