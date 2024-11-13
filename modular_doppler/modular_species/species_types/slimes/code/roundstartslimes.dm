@@ -11,6 +11,7 @@
 	mutantstomach = /obj/item/organ/stomach/slime
 	mutantbrain = /obj/item/organ/brain/slime
 	mutantears = /obj/item/organ/ears/jelly
+	hair_color_mode = null
 	inherent_traits = list(
 		TRAIT_MUTANT_COLORS,
 		TRAIT_TOXINLOVER,
@@ -55,11 +56,11 @@
 	zone = BODY_ZONE_CHEST
 	organ_flags = ORGAN_UNREMOVABLE
 
-/obj/item/organ/internal/tongue/jelly
+/obj/item/organ/tongue/jelly
 	zone = BODY_ZONE_CHEST
 	organ_flags = ORGAN_UNREMOVABLE
 
-/obj/item/organ/internal/lungs/slime
+/obj/item/organ/lungs/slime
 	zone = BODY_ZONE_CHEST
 	organ_flags = ORGAN_UNREMOVABLE
 
@@ -163,7 +164,7 @@
 * CORE EJECTION PROC -
 * Makes it so that when a slime dies, their core ejects and their body is qdel'd.
 */
-/obj/item/organ/internal/brain/slime/proc/core_ejection(mob/living/victim, new_stat, turf/loc_override)
+/obj/item/organ/brain/slime/proc/core_ejection(mob/living/victim, new_stat, turf/loc_override)
 	if(core_ejected)
 		return
 	core_ejected = TRUE
