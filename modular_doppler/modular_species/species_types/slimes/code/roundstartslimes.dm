@@ -391,6 +391,7 @@
 	examine_limb_id = SPECIES_SLIMEPERSON
 	coldmod = 3
 	heatmod = 1
+	specific_alpha = 155
 	mutanteyes = /obj/item/organ/eyes/roundstartslime
 	mutanttongue = /obj/item/organ/tongue/jelly
 
