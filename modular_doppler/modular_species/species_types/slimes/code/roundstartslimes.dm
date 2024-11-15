@@ -26,6 +26,12 @@
 	/// Ability to allow them to turn their core's GPS on or off.
 	var/datum/action/innate/core_signal/core_signal
 
+	digitigrade_customization = DIGITIGRADE_OPTIONAL
+	digi_leg_overrides = list(
+		BODY_ZONE_L_LEG = /obj/item/bodypart/leg/left/digitigrade,
+		BODY_ZONE_R_LEG = /obj/item/bodypart/leg/right/digitigrade,
+	)
+
 /datum/species/jelly/on_species_gain(mob/living/carbon/new_jellyperson, datum/species/old_species, pref_load)
 	. = ..()
 	if(ishuman(new_jellyperson))
