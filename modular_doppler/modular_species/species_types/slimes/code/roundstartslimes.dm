@@ -299,7 +299,7 @@
 */
 /datum/action/cooldown/spell/slime_washing
 	name = "Toggle Slime Cleaning"
-	desc = "Filter grime through your outer membrane, cleaning yourself and your equipment for sustenance. Also cleans the floor, providing your feet are uncovered. For sustenance."
+	desc = "Filter grime through your outer membrane, cleaning yourself and your equipment for sustenance. Also cleans the floor. For sustenance."
 	button_icon = 'icons/mob/actions/actions_silicon.dmi'
 	button_icon_state = "activate_wash"
 

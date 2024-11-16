@@ -121,13 +121,11 @@
 /datum/bodypart_overlay/mutant/proc/inherit_color(obj/item/bodypart/bodypart_owner, force)
 	if(isnull(bodypart_owner))
 		draw_color = null
-		alpha = 255 // DOPPLER EDIT ADDITION - Mutant bodyparts transparency are based on limb transparency
 		return TRUE
 
 	if(draw_color && !force)
 		return FALSE
 
-	alpha = bodypart_owner.alpha // DOPPLER EDIT ADDITION - Mutant bodyparts transparency are based on limb transparency
 	switch(color_source)
 		if(ORGAN_COLOR_OVERRIDE)
 			draw_color = override_color(bodypart_owner)
