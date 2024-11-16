@@ -23,7 +23,7 @@
 	var/image/main_image = get_image(layer, limb)
 	 //DOPPLER EDIT START - Sets tails to be the transparency of their limb; mostly for slimepeople.
 	if(limb)
-		main_image.alpha = limb_alpha
+		main_image.alpha = limb.alpha
 	//DOPPLER EDIT END
 	color_image(main_image, layer, limb)
 	if(blocks_emissive == EMISSIVE_BLOCK_NONE || !limb)
