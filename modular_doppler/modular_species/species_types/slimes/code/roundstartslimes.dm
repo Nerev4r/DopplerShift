@@ -14,6 +14,7 @@
 	hair_color_mode = null
 	inherent_traits = list(
 		TRAIT_MUTANT_COLORS,
+		TRAIT_NOBLOOD,
 		TRAIT_TOXINLOVER,
 		TRAIT_EASYDISMEMBER,
 	)
