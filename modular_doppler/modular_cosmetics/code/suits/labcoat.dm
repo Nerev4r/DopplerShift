@@ -25,8 +25,8 @@
 	icon = 'modular_doppler/modular_cosmetics/icons/obj/suit/labcoat.dmi'
 	worn_icon = 'modular_doppler/modular_cosmetics/icons/mob/suit/labcoat.dmi'
 	icon_state = "labcoat_med"
-	unique_reskin = list(
-		"Buttoned Top" = "labcoat_med",
-		"Unbuttoned Top" = "labcoat_opentop"
-	)
-	supports_variations_flags = CLOTHING_DIGITIGRADE_VARIATION_NO_NEW_ICON
+
+/obj/item/clothing/suit/toggle/labcoat/medical/unbuttoned
+	name = "unbuttoned medical labcoat"
+	desc = "Someone has taken to the task of cutting the top few buttons off this labcoat. It's particularly slutty in just the way you'd expect."
+	icon_state = "labcoat_opentop"

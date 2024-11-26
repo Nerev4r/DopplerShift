@@ -14,6 +14,9 @@
 	excluded_products = list(
 		/obj/item/clothing/shoes/sneakers/blue = 4,
 	)
+	contraband_doppler = list(
+		/obj/item/clothing/suit/toggle/labcoat/medical/unbuttoned = 6,
+	)
 
 /obj/machinery/vending/wardrobe/jani_wardrobe
 	products_doppler = list(
