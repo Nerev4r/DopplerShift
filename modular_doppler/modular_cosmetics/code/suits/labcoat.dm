@@ -18,3 +18,15 @@
 	icon = 'modular_doppler/modular_cosmetics/icons/obj/suit/labcoat.dmi'
 	worn_icon = 'modular_doppler/modular_cosmetics/icons/mob/suit/labcoat.dmi'
 	supports_variations_flags = CLOTHING_DIGITIGRADE_VARIATION_NO_NEW_ICON
+
+/obj/item/clothing/suit/toggle/labcoat/medical
+	name = "medical labcoat"
+	desc = "A suit that protects against minor chemical spills. This one is greener than you'd typically expect."
+	icon = 'modular_doppler/modular_cosmetics/icons/obj/suit/labcoat.dmi'
+	worn_icon = 'modular_doppler/modular_cosmetics/icons/mob/suit/labcoat.dmi'
+	icon_state = "labcoat_med"
+	unique_reskin = list(
+		"Buttoned Top" = "labcoat_med",
+		"Unbuttoned Top" = "labcoat_opentop"
+	)
+	supports_variations_flags = CLOTHING_DIGITIGRADE_VARIATION_NO_NEW_ICON

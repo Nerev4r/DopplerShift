@@ -118,9 +118,9 @@
 	new /obj/item/clothing/shoes/jackboots(src)
 
 /obj/item/storage/bag/garment/chief_medical/PopulateContents()
-	new /obj/item/clothing/under/rank/medical/chief_medical_officer(src)
-	new /obj/item/clothing/under/rank/medical/chief_medical_officer/skirt(src)
-	new /obj/item/clothing/under/rank/medical/chief_medical_officer/scrubs(src)
+	//new /obj/item/clothing/under/rank/medical/chief_medical_officer(src)
+	//new /obj/item/clothing/under/rank/medical/chief_medical_officer/skirt(src)
+	//new /obj/item/clothing/under/rank/medical/chief_medical_officer/scrubs(src) //TRIPLE DOPPLER EDIT - Commented out until we have replacements.
 	new /obj/item/clothing/under/rank/medical/chief_medical_officer/turtleneck(src)
 	new /obj/item/clothing/under/rank/medical/chief_medical_officer/turtleneck/skirt(src)
 	new /obj/item/clothing/suit/hooded/wintercoat/medical/cmo(src)
@@ -129,7 +129,7 @@
 	new /obj/item/clothing/head/beret/medical/cmo(src)
 	new /obj/item/clothing/head/utility/surgerycap/cmo(src)
 	new /obj/item/clothing/neck/cloak/cmo(src)
-	new /obj/item/clothing/shoes/sneakers/blue (src)
+	//new /obj/item/clothing/shoes/sneakers/blue (src) //DOPPLER EDIT REMOVAL - We don't blue here!
 
 /obj/item/storage/bag/garment/engineering_chief/PopulateContents()
 	new /obj/item/clothing/under/rank/engineering/chief_engineer(src)
