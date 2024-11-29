@@ -21,7 +21,7 @@
 /datum/bodypart_overlay/proc/get_overlay(layer, obj/item/bodypart/limb)
 	layer = bitflag_to_layer(layer)
 	var/image/main_image = get_image(layer, limb)
-	 //DOPPLER EDIT START - Sets tails to be the transparency of their limb; mostly for slimepeople.
+	//DOPPLER EDIT START - Sets tails to be the transparency of their limb; mostly for slimepeople.
 	if(limb)
 		main_image.alpha = limb.alpha
 	//DOPPLER EDIT END
