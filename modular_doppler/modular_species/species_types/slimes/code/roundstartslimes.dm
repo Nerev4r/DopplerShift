@@ -170,22 +170,17 @@
 * Makes it so that when a slime dies, their core ejects and their body is qdel'd.
 */
 /obj/item/organ/brain/slime/proc/core_ejection(mob/living/victim, new_stat, turf/loc_override)
-	message_admins("core ejection red line -<br>core_ejected: [core_ejected]<br>victim: [victim]")
 	if(core_ejected)
 		return
-	message_admins("core ejection under red line -<br>core_ejected: [core_ejected]<br>victim: [victim]")
 	core_ejected = TRUE
 	victim.visible_message(span_warning("[victim]'s body completely dissolves, collapsing outwards!"), span_notice("Your body completely dissolves, collapsing outwards!"), span_notice("You hear liquid splattering."))
 	var/atom/death_loc = victim.drop_location()
-	message_admins("core_ejection {UNIQUE_IDENTIFIER} -<br>victim: [victim]<br>src: [src]<br>src.loc: [src.loc]<br>brain: [victim?.get_organ_slot(ORGAN_SLOT_BRAIN)]<br>death_loc: [death_loc]")
 	victim.unequip_everything()
 	if(victim.get_organ_slot(ORGAN_SLOT_BRAIN) == src)
 		Remove(victim)
-		message_admins("core_ejection blue line -<br>src: [src]<br>src.loc: [src.loc]")
 	if(death_loc)
 		forceMove(death_loc)
 	src.wash(CLEAN_WASH)
-	message_admins("core_ejection blue line -<br>src: [src]<br>src.loc: [src.loc]")
 	new death_melt_type(death_loc, victim.dir)
 
 	do_steam_effects(get_turf(victim))
