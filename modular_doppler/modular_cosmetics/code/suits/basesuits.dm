@@ -16,7 +16,11 @@
 	bodyshape_icon_files = list(BODYSHAPE_HUMANOID_T = 'icons/mob/clothing/suits/wizard.dmi',
 		BODYSHAPE_DIGITIGRADE_T = 'modular_doppler/modular_cosmetics/icons/mob/suit/wizard_digi.dmi')
 
-
+/obj/item/clothing/suit/hooded/wintercoat/medical
+	supported_bodyshapes = null
+	bodyshape_icon_files = null
+	icon = 'modular_doppler/modular_cosmetics/icons/obj/suit/wintercoat.dmi'
+	worn_icon = 'modular_doppler/modular_cosmetics/icons/mob/suit/wintercoat.dmi'
 
 /obj/item/clothing/suit/toggle/labcoat
 	supports_variations_flags = CLOTHING_DIGITIGRADE_VARIATION
@@ -59,6 +63,10 @@
 	supported_bodyshapes = list(BODYSHAPE_HUMANOID, BODYSHAPE_SNOUTED)
 	bodyshape_icon_files = list(BODYSHAPE_HUMANOID_T = 'icons/mob/clothing/head/spacehelm.dmi',
 		BODYSHAPE_SNOUTED_T = 'modular_doppler/modular_cosmetics/icons/mob/head/spacehelm_muzzled.dmi')
+
+/obj/item/clothing/head/helmet/space/plasmaman
+	supported_bodyshapes = null
+	bodyshape_icon_files = null
 
 /obj/item/clothing/suit/space
 	supports_variations_flags = CLOTHING_DIGITIGRADE_VARIATION
