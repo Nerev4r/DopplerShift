@@ -48,3 +48,7 @@
 /datum/greyscale_config/sneakers_marisa/worn/digi
 	name = "Worn Digi Marisa Sneakers"
 	icon_file = 'modular_doppler/modular_cosmetics/icons/mob/shoes/basefeet_digi.dmi'
+
+/obj/item/clothing/shoes/wheelys
+	supported_bodyshapes = null
+	bodyshape_icon_files = null
