@@ -44,6 +44,7 @@
 	quirk_holder_carbon.implant_skillchip(installed_chip, force = TRUE)
 	installed_chip.try_activate_skillchip(silent = FALSE, force = TRUE)
 
+/* Doppler Edit Change - Hell No
 /datum/quirk/chipped/proc/apply_effect(datum/source, obj/item/brain_applied)
 	SIGNAL_HANDLER
 	var/mob/living/carbon/quirk_holder_carbon = quirk_holder
@@ -56,6 +57,7 @@
 	if(QDELING(source) || brain_removed == quirk_holder_carbon.get_organ_slot(ORGAN_SLOT_BRAIN))
 		quirk_holder.remove_status_effect(itchy_effect)
 		itchy_effect = null
+*/
 
 /datum/quirk/chipped/remove()
 	QDEL_NULL(installed_chip)
